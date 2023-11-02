@@ -21,7 +21,7 @@ class ImagesController < ApplicationController
 
   # POST /images or /images.json
   def create
-    @image = Image.new(image_params)
+    @image = Image.new(image_params.merge(avatars: params[:image][:avatars]))
     @image.user = current_user
     respond_to do |format|
       if @image.save
@@ -58,13 +58,14 @@ class ImagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_image
-      @image = Image.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def image_params
-      params.require(:image).permit(:name, :picture, :user_id, :avatar)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_image
+    @image = Image.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def image_params
+    params.require(:image).permit(:name, :picture, :user_id, avatars: [])
+  end
 end

@@ -12,7 +12,6 @@ class Payment < ApplicationRecord
   end
 
   def process_payment
-    binding.pry
     customer = Stripe::Customer.create email: email, card: token
 
     Stripe::Charge.create customer: customer.id,

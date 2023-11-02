@@ -1,5 +1,6 @@
 <% if current_user %>
   <h3>Welcome: <%= current_user.email %></h3>
+  <%= button_to "Sign Out",  destroy_user_session_path, method: :delete, class:"nav-link active" %>
 <% else %>
   <div class="jumbotron">
     <h2>Welcome to the Photo Management App!</h2>
@@ -7,7 +8,6 @@
       You'll love managing your Photos with our application. Sign up!
     </p>
   </div>
-
   <div class="row">
     <div class="plans clearfix">
       <div class="col-lg-3 col-lg-offset-3 plan">
